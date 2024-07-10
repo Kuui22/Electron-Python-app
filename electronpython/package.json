@@ -1,0 +1,27 @@
+{
+  "name": "electronpython",
+  "version": "1.0.0",
+  "description": "using both electron and python!",
+  "main": "main.js",
+  "scripts": {
+    "test": "testapp",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kuui22/Electron-Python-app.git"
+  },
+  "keywords": [
+    "electron",
+    "python"
+  ],
+  "author": "Kuui",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Kuui22/Electron-Python-app/issues"
+  },
+  "homepage": "https://github.com/Kuui22/Electron-Python-app#readme",
+  "devDependencies": {
+    "electron": "^31.2.0"
+  }
+}

@@ -1,0 +1,4 @@
+STARTING
+https://www.electronjs.org/docs/latest/tutorial/quick-start
+npm init and follow instructions
+npm install --save-dev electron
