@@ -125,12 +125,16 @@ body {
     padding: 20px;
     flex: 1;
     margin: 0 10px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;  /* Add transition for smooth effect */
 }
 
 .card h2 {
     margin: 0 0 10px;
 }
-
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Increase shadow on hover */
+    transform: translateY(-5px);  /* Slightly move up on hover */
+}
 .recent-messages {
     background-color: #FFF;
     border-radius: 10px;
@@ -154,4 +158,18 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+/* animation on hover for text*/
+.sidebar nav ul li a:hover,
+.top-nav label:hover,
+.top-nav select:hover,
+.user-info span:hover,
+.dashboard h1:hover,
+.dashboard p:hover,
+.card h2:hover,
+.card p:hover,
+.recent-messages h2:hover,
+.recent-messages table td:hover {
+    text-decoration: underline;
 }
