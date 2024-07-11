@@ -210,20 +210,28 @@ body {
     border-radius: 50%;
 }
 
-/* animation on hover for text*/
+/* animation on hover for text - better use a href with no drag unless you want it to underline from all the div
 .sidebar nav ul li a:hover,
 .top-nav label:hover,
 .top-nav select:hover,
 .user-info span:hover,
-.dashboard h1:hover,
-/*.dashboard p:hover,*/
+.dashboard h1:hover span,
+.dashboard p:hover,
 .card h2:hover,
-/*.card p:hover,*/
+.card p:hover,
 .recent-messages h2:hover,
 .recent-messages table td:hover {
     text-decoration: underline;
+}*/
+.no-link {
+    text-decoration: none;
+    cursor: default;
+    color: inherit; /* Ensure the text color remains the same */
+    -webkit-user-drag: none;
 }
-
+.no-link:hover{
+    text-decoration: underline;
+}
 /* tooltip on hover */
 
 [data-tooltip] {

@@ -6,7 +6,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World!</title>
+    <title>Electron style</title>
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/dropdown.css">
 </head>
@@ -18,12 +18,12 @@
             <div class="logo">Circle</div>
             <nav>
                 <ul>
-                    <li><a href="#" data-tooltip="hello">Dashboard</a></li>
-                    <li><a href="#">Lorem ipsum</a></li>
-                    <li><a href="#">Dolor sit amet</a></li>
-                    <li><a href="#">In ac hendrerit turpis</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Log Out</a></li>
+                    <li><a href="#" data-tooltip="hello" draggable="false">Dashboard</a></li>
+                    <li><a href="#" draggable="false">Lorem ipsum</a></li>
+                    <li><a href="#" draggable="false">Dolor sit amet</a></li>
+                    <li><a href="#" draggable="false">In ac hendrerit turpis</a></li>
+                    <li><a href="#" draggable="false">Settings</a></li>
+                    <li><a href="#" draggable="false">Log Out</a></li>
                     <li><button id="logButton">Send log</button></li>
                 </ul>
             </nav>
@@ -50,8 +50,8 @@
                 </div>
             </div>
             <div class="dashboard">
-                <h1>Dashboard</h1>
-                <p>Welcome Back, gino</p>
+                <h1><a href="#" class="no-link">Dashboard</a></h1>
+                <p><a href="#" class="no-link">Welcome Back, gino</a></p>
                 <div class="cards">
                     <div class="card">
                         <h2>Messages</h2>
