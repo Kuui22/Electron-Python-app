@@ -1,91 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello World!</title>
     <link rel="stylesheet" href="css/index.css">
-  </head>
-  <body>
+    <link rel="stylesheet" href="css/dropdown.css">
+</head>
+
+<body>
+
     <body>
-      <div class="sidebar">
-          <div class="logo">Circle</div>
-          <nav>
-              <ul>
-                  <li><a href="#" data-tooltip="hello">Dashboard</a></li>
-                  <li><a href="#">Lorem ipsum</a></li>
-                  <li><a href="#">Dolor sit amet</a></li>
-                  <li><a href="#">In ac hendrerit turpis</a></li>
-                  <li><a href="#">Settings</a></li>
-                  <li><a href="#">Log Out</a></li>
-                  <li><button id="logButton">Send log</button></li>
-              </ul>
-          </nav>
-      </div>
-      <div class="main-content">
-          <div class="top-nav">
-              <div class="sort">
-                  <label for="sort">Sort:</label>
-                  <select id="sort">
-                      <option>Last Week</option>
-                  </select>
-              </div>
-              <div class="user-info">
-                  <span>gino paolino</span>
-                  <span>gino@gmail.com</span>
-                  <img src="" alt="User Profile">
-              </div>
-          </div>
-          <div class="dashboard">
-              <h1>Dashboard</h1>
-              <p>Welcome Back, gino</p>
-              <div class="cards">
-                  <div class="card">
-                      <h2>Messages</h2>
-                      <p>12 Unread</p>
-                      <div class="chart"></div>
-                  </div>
-                  <div class="card">
-                      <h2>TODO</h2>
-                      <p>2 Actions</p>
-                      <div class="chart"></div>
-                  </div>
-                  <div class="card">
-                      <h2>Filler</h2>
-                      <p>Lorem ipsum</p>
-                      <div class="chart"></div>
-                  </div>
-              </div>
-              <div class="recent-messages">
-                  <h2>Recent Messages</h2>
-                  <table>
-                      <tr>
-                          <td><img src="" alt="Profile"></td>
-                          <td>Lorem ipsum</td>
-                          <td>We are using Node.js <span id="node-version"></span></td>
-                          <td>Lorem ipsum</td>
-                          <td>12.45pm</td>
-                      </tr>
-                      <tr>
-                          <td><img src="" alt="Profile"></td>
-                          <td>Lorem ipsum</td>
-                          <td>Chromium <span id="chrome-version"></span></td>
-                          <td>Lorem ipsum</td>
-                          <td>3.45pm</td>
-                      </tr>
-                      <tr>
-                          <td><img src="" alt="Profile"></td>
-                          <td>Lorem ipsum</td>
-                          <td>and Electron <span id="electron-version"></span></td>
-                          <td>Lorem ipsum</td>
-                          <td>Lorem ipsum</td>
-                      </tr>
-                  </table>
-              </div>
-          </div>
-      </div>
-  <script src="js/renderer.js"></script>
-  </body>
+        <div class="sidebar">
+            <div class="logo">Circle</div>
+            <nav>
+                <ul>
+                    <li><a href="#" data-tooltip="hello">Dashboard</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Dolor sit amet</a></li>
+                    <li><a href="#">In ac hendrerit turpis</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Log Out</a></li>
+                    <li><button id="logButton">Send log</button></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main-content">
+            <div class="top-nav">
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <div class="custom-select-trigger">
+                            <span>Last Week</span>
+                            <div class="arrow">▼</div>
+                        </div>
+                        <div class="custom-options closed">
+                            <span class="custom-option selected" data-value="last-week">Last Week</span>
+                            <span class="custom-option" data-value="last-month">Last Month</span>
+                            <span class="custom-option" data-value="last-year">Last Year</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <span>gino paolino</span>
+                    <span>gino@gmail.com</span>
+                    <img src="" alt="User Profile">
+                </div>
+            </div>
+            <div class="dashboard">
+                <h1>Dashboard</h1>
+                <p>Welcome Back, gino</p>
+                <div class="cards">
+                    <div class="card">
+                        <h2>Messages</h2>
+                        <p>12 Unread</p>
+                        <div class="chart"></div>
+                    </div>
+                    <div class="card">
+                        <h2>TODO</h2>
+                        <p>2 Actions</p>
+                        <div class="chart"></div>
+                    </div>
+                    <div class="card">
+                        <h2>Filler</h2>
+                        <p>Lorem ipsum</p>
+                        <div class="chart"></div>
+                    </div>
+                </div>
+                <div class="recent-messages">
+                    <h2>Recent Messages</h2>
+                    <table>
+                        <tr>
+                            <td><img src="" alt="Profile"></td>
+                            <td>Lorem ipsum</td>
+                            <td>We are using Node.js <span id="node-version"></span></td>
+                            <td>Lorem ipsum</td>
+                            <td>12.45pm</td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt="Profile"></td>
+                            <td>Lorem ipsum</td>
+                            <td>Chromium <span id="chrome-version"></span></td>
+                            <td>Lorem ipsum</td>
+                            <td>3.45pm</td>
+                        </tr>
+                        <tr>
+                            <td><img src="" alt="Profile"></td>
+                            <td>Lorem ipsum</td>
+                            <td>and Electron <span id="electron-version"></span></td>
+                            <td>Lorem ipsum</td>
+                            <td>Lorem ipsum</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <script src="js/renderer.js"></script>
+        <script src="js/dropdown.js"></script>
+    </body>
+
 </html>

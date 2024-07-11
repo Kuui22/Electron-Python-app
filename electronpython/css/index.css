@@ -23,7 +23,8 @@ body {
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.sidebar:hover{
+
+.sidebar:hover {
     opacity: 1;
 }
 
@@ -58,7 +59,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 10px 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -73,37 +74,52 @@ body {
 .sort label {
     margin-right: 10px;
 }
+
 .sort select {
-    padding: 5px 30px 5px 10px;  /* Add padding for better appearance */
+    padding: 5px 30px 5px 10px;
+    /* Add padding for better appearance */
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;  /* Make the corners rounded */
-    background-color:rgba(255, 255, 255, 0.1);
-    font-size: 14px;  /* Adjust font size */
-    appearance: none;  /* Remove default arrow */
-    -webkit-appearance: none;  /* Remove default arrow in Safari */
-    -moz-appearance: none;  /* Remove default arrow in Firefox */
+    border-radius: 20px;
+    /* Make the corners rounded */
+    background-color: rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    appearance: none;
+    /* Remove default arrow */
+    -webkit-appearance: none;
+    /* Remove default arrow in Safari */
+    -moz-appearance: none;
+    /* Remove default arrow in Firefox */
 }
 
 .sort select:focus {
-    outline: none;  /* Remove outline on focus */
-    border-color: #6C63FF;  /* Change border color on focus */
+    outline: none;
+    /* Remove outline on focus */
+    border-color: #6C63FF;
+    /* Change border color on focus */
 }
+
 .sort::after {
-    content: '▼';  /* Custom arrow content */
-    font-size: 12px;  /* Adjust font size */
-    color: #333;  /* Arrow color */
+    content: '▼';
+    /* Custom arrow content */
+    font-size: 12px;
+    color: #333;
+    /* Arrow color */
     position: absolute;
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
-    pointer-events: none;  /* Ensure clicks go to the select element */
+    pointer-events: none;
+    /* Ensure clicks go to the select element */
 }
+
 .user-info {
     display: flex;
     align-items: center;
 }
+
 .user-info span {
-    margin-right: 10px;  /* Add space between spans */
+    margin-right: 10px;
+    /* Add space between spans */
 }
 
 .user-info img {
@@ -114,7 +130,7 @@ body {
 }
 
 .dashboard {
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
 }
@@ -130,33 +146,40 @@ body {
 }
 
 .card {
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     flex: 1;
     margin: 0 10px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;  /* Add transition for smooth effect */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* Add transition for smooth effect */
 }
 
 .card h2 {
     margin: 0 0 10px;
 }
+
 .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);  /* Increase shadow on hover */
-    transform: translateY(-5px);  /* Slightly move up on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Increase shadow on hover */
+    transform: translateY(-5px);
+    /* Slightly move up on hover */
 }
+
 .recent-messages {
-    background-color:rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     padding: 20px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-.recent-messages:hover{
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-    transform: translateY(-5px);  
+
+.recent-messages:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
 }
+
 .recent-messages table {
     width: 100%;
     border-collapse: collapse;
@@ -196,13 +219,15 @@ body {
     position: relative;
     cursor: pointer;
 }
+
 /* Tooltip text */
 [data-tooltip]::after {
     content: attr(data-tooltip);
     position: absolute;
     top: 50%;
     left: 100%;
-    transform: translateY(-50%);  /*change these to change position*/
+    transform: translateY(-50%);
+    /*change these to change position*/
     background-color: #333;
     color: #fff;
     padding: 5px 10px;
@@ -216,6 +241,7 @@ body {
     font-size: 12px;
     margin-left: 10px;
 }
+
 /* Show the tooltip on hover */
 [data-tooltip]:hover::after {
     opacity: 1;
