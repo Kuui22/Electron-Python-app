@@ -1,0 +1,157 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    background-color: #6C63FF;
+    color: #FFF;
+    width: 250px;
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin: 10px 0;
+}
+
+.sidebar nav ul li a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.main-content {
+    flex: 1;
+    background-color: #F7F7F7;
+    padding: 20px;
+}
+
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sort label {
+    margin-right: 10px;
+}
+.sort select {
+    padding: 5px 30px 5px 10px;  /* Add padding for better appearance */
+    border: 1px solid #ccc;  /* Add a border */
+    border-radius: 20px;  /* Make the corners rounded */
+    background-color: #fff;  /* Set the background color */
+    font-size: 14px;  /* Adjust font size */
+    appearance: none;  /* Remove default arrow */
+    -webkit-appearance: none;  /* Remove default arrow in Safari */
+    -moz-appearance: none;  /* Remove default arrow in Firefox */
+}
+
+.sort select:focus {
+    outline: none;  /* Remove outline on focus */
+    border-color: #6C63FF;  /* Change border color on focus */
+}
+.sort::after {
+    content: '▼';  /* Custom arrow content */
+    font-size: 12px;  /* Adjust font size */
+    color: #333;  /* Arrow color */
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;  /* Ensure clicks go to the select element */
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.user-info span {
+    margin-right: 10px;  /* Add space between spans */
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+.dashboard {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.dashboard h1 {
+    margin: 0 0 10px;
+}
+
+.cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1;
+    margin: 0 10px;
+}
+
+.card h2 {
+    margin: 0 0 10px;
+}
+
+.recent-messages {
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.recent-messages table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.recent-messages table tr {
+    border-bottom: 1px solid #DDD;
+}
+
+.recent-messages table td {
+    padding: 10px;
+}
+
+.recent-messages table img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
