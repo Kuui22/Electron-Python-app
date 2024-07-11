@@ -3,18 +3,28 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    background-color: #8b6688;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .sidebar {
     background-color: #6C63FF;
     color: #FFF;
     width: 250px;
-    height: 100vh;
+    height: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-radius: 20px;
+    align-self: flex-start;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.sidebar:hover{
+    opacity: 1;
 }
 
 .sidebar .logo {
@@ -39,15 +49,16 @@ body {
 
 .main-content {
     flex: 1;
-    background-color: #F7F7F7;
+    background-color: rgba(255, 255, 255, 0);
     padding: 20px;
+    overflow: auto;
 }
 
 .top-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #FFF;
+    background-color:rgba(255, 255, 255, 0.1);
     padding: 10px 20px;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -64,9 +75,9 @@ body {
 }
 .sort select {
     padding: 5px 30px 5px 10px;  /* Add padding for better appearance */
-    border: 1px solid #ccc;  /* Add a border */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;  /* Make the corners rounded */
-    background-color: #fff;  /* Set the background color */
+    background-color:rgba(255, 255, 255, 0.1);
     font-size: 14px;  /* Adjust font size */
     appearance: none;  /* Remove default arrow */
     -webkit-appearance: none;  /* Remove default arrow in Safari */
@@ -103,7 +114,7 @@ body {
 }
 
 .dashboard {
-    background-color: #FFF;
+    background-color:rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
 }
@@ -119,7 +130,7 @@ body {
 }
 
 .card {
-    background-color: #FFF;
+    background-color:rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -136,11 +147,16 @@ body {
     transform: translateY(-5px);  /* Slightly move up on hover */
 }
 .recent-messages {
-    background-color: #FFF;
+    background-color:rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-
+.recent-messages:hover{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-5px);  
+}
 .recent-messages table {
     width: 100%;
     border-collapse: collapse;
@@ -166,9 +182,9 @@ body {
 .top-nav select:hover,
 .user-info span:hover,
 .dashboard h1:hover,
-.dashboard p:hover,
+/*.dashboard p:hover,*/
 .card h2:hover,
-.card p:hover,
+/*.card p:hover,*/
 .recent-messages h2:hover,
 .recent-messages table td:hover {
     text-decoration: underline;
