@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 // include the Node.js 'path' module at the top of your file
 const path = require('node:path')
 
@@ -12,6 +12,10 @@ const createWindow = () => {
   })
 
   win.loadFile('index.html')
+  // Log messages from renderer process
+  ipcMain.on('log-message', (event, ...args) => {
+    console.log(...args);
+  });
 }
 
 app.whenReady().then(() => {

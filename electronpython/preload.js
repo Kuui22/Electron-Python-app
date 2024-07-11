@@ -1,3 +1,11 @@
+
+//renderer process function exposed
+const { contextBridge, ipcRenderer } = require('electron');
+contextBridge.exposeInMainWorld('electron', {
+  log: (...args) => ipcRenderer.send('log-message', ...args)
+});
+
+
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
       const element = document.getElementById(selector)

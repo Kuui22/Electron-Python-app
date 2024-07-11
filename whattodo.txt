@@ -2,3 +2,12 @@ STARTING
 https://www.electronjs.org/docs/latest/tutorial/quick-start
 npm init and follow instructions
 npm install --save-dev electron
+npm start
+
+HOW TO LOG IN TERMINAL:
+
+Ensure your main.js or equivalent main process script is set up to handle console logs from the renderer process. 
+You can use Electron's IPC (Inter-Process Communication) to achieve this.
+Use a preload script to expose a logging function to the renderer process that sends messages to the main process.
+In your renderer process, use the exposed electron.log function to send log messages to the main process.
+Make sure to include your renderer script in the HTML file.
