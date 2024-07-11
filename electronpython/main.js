@@ -10,7 +10,7 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  win.setMinimumSize(800, 600);
   win.loadFile('index.html')
   // Log messages from renderer process
   ipcMain.on('log-message', (event, ...args) => {
