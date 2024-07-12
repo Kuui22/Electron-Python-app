@@ -1,3 +1,10 @@
+:root{
+    --main-color: #8b6688;
+    --secondary-color:#6C63FF;
+    --focus-color:#8ba3f0;
+}
+
+
 ::-webkit-scrollbar-thumb {
     background-image: linear-gradient(180deg, #da4275 0%, #708ad4 99%);
     box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
@@ -15,12 +22,12 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    background-color: #8b6688;
+    background-color: var(--main-color);
     height: 100vh;
     overflow: hidden;
 }
 .sidebar {
-    background-color: #6C63FF;
+    background-color: var(--secondary-color);
     color: #FFF;
     width: 250px;
     height: auto;
@@ -111,7 +118,7 @@ body {
 .sort select:focus {
     outline: none;
     /* Remove outline on focus */
-    border-color: #6C63FF;
+    border-color: var(--secondary-color);
     /* Change border color on focus */
 }
 
@@ -239,6 +246,11 @@ body {
     text-decoration: underline;
 }
 /* tooltip on hover */
+
+.nodrag{
+    -webkit-user-drag: none;
+}
+
 
 [data-tooltip] {
     position: relative;
