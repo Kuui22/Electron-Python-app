@@ -1,6 +1,37 @@
 
 //renderer process function exposed
 const { contextBridge, ipcRenderer } = require('electron');
+const Dexie = require('dexie');
+
+//creating db from dexie
+const db = new Dexie('myDb');
+//db.delete()
+db.version(1).stores({
+  mode: 'id, current'
+});
+db.open().catch(function (error) {
+  console.error("ERROR: " + error);
+});
+//expose functions to interact with db
+contextBridge.exposeInMainWorld('dexie', {
+  addData: async (data) => {
+    await db.mode.add(data);
+  },
+  getAllData: async () => {
+    return await db.mode.toArray();
+  },
+  updateCurrentMode: async (newMode) => {
+    await db.mode.update({current: newMode });
+  },
+  clearData: async () => {
+    await db.mode.clear();
+  },
+  modeExists: async () => {
+    const currmode = await db.mode.get(1);
+    return currmode.current !== undefined;
+}
+});
+
 contextBridge.exposeInMainWorld('electron', {
   log: (...args) => ipcRenderer.send('log-message', ...args)
 });

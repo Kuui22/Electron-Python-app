@@ -23,5 +23,9 @@
   "homepage": "https://github.com/Kuui22/Electron-Python-app#readme",
   "devDependencies": {
     "electron": "^31.2.0"
+  },
+  "dependencies": {
+    "dexie": "^4.0.8",
+    "webpack": "^5.93.0"
   }
 }
