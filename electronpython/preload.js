@@ -21,14 +21,19 @@ contextBridge.exposeInMainWorld('dexie', {
     return await db.mode.toArray();
   },
   updateCurrentMode: async (newMode) => {
-    await db.mode.update({current: newMode });
+    await db.mode.update(1, {current: newMode });
   },
   clearData: async () => {
     await db.mode.clear();
   },
   modeExists: async () => {
     const currmode = await db.mode.get(1);
-    return currmode.current !== undefined;
+    if(currmode){
+      return currmode.current
+    }
+    else{
+      return undefined
+    }
 }
 });
 
