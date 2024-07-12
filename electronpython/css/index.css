@@ -2,6 +2,9 @@
     --main-color: #8b6688;
     --secondary-color:#6C63FF;
     --focus-color:#8ba3f0;
+    --font-color:#111111;
+    --main-color-dark:#111111;
+    --font-color-dark:#ebebeb;
 }
 
 
@@ -14,7 +17,7 @@
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background-color: #e4e4e4;
+    background-color: var(--focus-color);
     border-radius: 100px;
 }
 body {
@@ -25,10 +28,11 @@ body {
     background-color: var(--main-color);
     height: 100vh;
     overflow: hidden;
+    color: var(--font-color);
 }
 .sidebar {
     background-color: var(--secondary-color);
-    color: #FFF;
+    color: var(--font-color);
     width: 250px;
     height: auto;
     padding: 20px;
@@ -62,7 +66,7 @@ body {
 }
 
 .sidebar nav ul li a {
-    color: #FFF;
+    color: var(--font-color);
     text-decoration: none;
 }
 .sidebar nav ul li a img {
@@ -87,53 +91,6 @@ body {
     padding: 10px 20px;
     border-radius: 10px;
     margin-bottom: 20px;
-}
-
-.sort {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.sort label {
-    margin-right: 10px;
-}
-
-.sort select {
-    padding: 5px 30px 5px 10px;
-    /* Add padding for better appearance */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    /* Make the corners rounded */
-    background-color: rgba(255, 255, 255, 0.1);
-    font-size: 14px;
-    appearance: none;
-    /* Remove default arrow */
-    -webkit-appearance: none;
-    /* Remove default arrow in Safari */
-    -moz-appearance: none;
-    /* Remove default arrow in Firefox */
-}
-
-.sort select:focus {
-    outline: none;
-    /* Remove outline on focus */
-    border-color: var(--secondary-color);
-    /* Change border color on focus */
-}
-
-.sort::after {
-    content: '▼';
-    /* Custom arrow content */
-    font-size: 12px;
-    color: #333;
-    /* Arrow color */
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    /* Ensure clicks go to the select element */
 }
 
 .user-info {
@@ -210,7 +167,7 @@ body {
 }
 
 .recent-messages table tr {
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid var(--secondary-color);
 }
 
 .recent-messages table td {

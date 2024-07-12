@@ -2,6 +2,9 @@
     --main-color: #8b6688;
     --secondary-color:#6C63FF;
     --focus-color:#8ba3f0;
+    --font-color:#111111;
+    --main-color-dark:#111111;
+    --font-color-dark:#ebebeb;
 }
 
 .custom-select-wrapper {
@@ -20,11 +23,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--main-color);
     padding: 10px 15px;
     font-size: 16px;
-    color: #333;
-    border: 1px solid #ccc;
+    color: var(--font-color);
+    border: 1px solid var(--main-color);
     border-radius: 20px;
     cursor: pointer;
 }
@@ -60,7 +63,7 @@
     padding: 10px 15px;
     font-size: 16px;
     width: 80%;
-    color: #333;
+    color: var(--font-color);
     cursor: pointer;
     white-space: nowrap;
     border-radius: 20px;
@@ -73,5 +76,5 @@
 
 .custom-option.selected {
     background-color:var(--secondary-color);
-    color: #fff;
+    color: var(--font-color);
 }
