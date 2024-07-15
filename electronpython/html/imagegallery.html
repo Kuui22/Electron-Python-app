@@ -6,7 +6,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image generation</title>
+    <title>Image gallery</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/dropdown.css">
     <link rel="stylesheet" href="../css/gallery.css">
@@ -22,7 +22,7 @@
                     <li><a href="../index.html" data-tooltip="hello" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Dashboard</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Lorem ipsum</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Dolor sit amet</a></li>
-                    <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Image generation</a></li>
+                    <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Image gallery</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Settings</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Log Out</a></li>
                     <li><button id="logButton">Send log</button></li>
@@ -30,11 +30,12 @@
                 </ul>
             </nav>
         </div>
+        <div class="gallery">
         <div class="gallery-container">
             <button id="gallery-left" class="arrow left-arrow">&#10094;</button>
             <img id="gallery-image" src="" alt="Image 1">
             <button id="gallery-right"class="arrow right-arrow">&#10095;</button>
-        </div>
+        </div></div>
     <script src="../js/renderer.js"></script>
     <script src="../js/gallery.js"></script>    
     <!-- <script src="js/dropdown.js"></script> -->

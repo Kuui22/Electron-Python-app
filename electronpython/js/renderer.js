@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         focus_color: rootstyle.getPropertyValue('--focus-color'),
         font_color: rootstyle.getPropertyValue('--font-color'),
         main_color_dark: rootstyle.getPropertyValue('--main-color-dark'),
+        secondary_color_dark: rootstyle.getPropertyValue('--secondary-color-dark'),
         font_color_dark: rootstyle.getPropertyValue('--font-color-dark')
     }
     //check current mode and set colors fitting it
@@ -58,11 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mode == 'Light') {
             root.style.setProperty('--main-color', colors.main_color);
             root.style.setProperty('--font-color', colors.font_color);
+            root.style.setProperty('--secondary-color', colors.secondary_color);
             modeswitcher.innerText = 'Dark mode';
         }
         else {
             root.style.setProperty('--main-color', colors.main_color_dark);
             root.style.setProperty('--font-color', colors.font_color_dark);
+            root.style.setProperty('--secondary-color', colors.secondary_color_dark);
             modeswitcher.innerText = 'Light mode';
         }
     }
@@ -71,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mode == 'Light') {
             root.style.setProperty('--main-color', colors.main_color_dark);
             root.style.setProperty('--font-color', colors.font_color_dark);
+            root.style.setProperty('--secondary-color', colors.secondary_color_dark);
             modeswitcher.innerText = 'Light mode';
             mode = 'Dark';
             updateMode("Dark");
@@ -78,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         else {
             root.style.setProperty('--main-color', colors.main_color);
             root.style.setProperty('--font-color', colors.font_color);
+            root.style.setProperty('--secondary-color', colors.secondary_color);
             modeswitcher.innerText = 'Dark mode';
             mode = 'Light';
             updateMode("Light");

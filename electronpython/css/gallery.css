@@ -1,18 +1,30 @@
+
+.gallery{
+    align-items: center;
+    justify-content: center;
+}
 .gallery-container {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
+    width: 100%;
+    max-width: 60vw;
     max-height: 80vh;
     border-radius: 8px;
     padding: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    min-width:60vw;
+    min-height: 80vh;
 }
 
 .gallery-container img {
     max-width: 100%;
     max-height: 80vh;
     border-radius: 8px;
+    display: block;
+    margin: 0 auto;
 }
 
 .arrow {
@@ -25,12 +37,13 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
 }
 
 .left-arrow {
-    left: 0;
+    left: 10px;
 }
 
 .right-arrow {
-    right: 0;
+    right: 10px;
 }
