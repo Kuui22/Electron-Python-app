@@ -40,7 +40,11 @@ contextBridge.exposeInMainWorld('dexie', {
 contextBridge.exposeInMainWorld('electron', {
   log: (...args) => ipcRenderer.send('log-message', ...args)
 });
-
+contextBridge.exposeInMainWorld('imageAPI', {
+  getImagesFromDirectory: (reldirectory) => {
+      return ipcRenderer.invoke('get-images', reldirectory);
+  }
+});
 
 window.addEventListener('DOMContentLoaded', () => {
   const replaceText = (selector, text) => {
