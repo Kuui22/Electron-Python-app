@@ -1,6 +1,5 @@
 
 function send(str) {
-    //window.electron.testboth(str)
     window.electron.sendPython(str)
 }
 
@@ -12,9 +11,25 @@ function generateRequest (prompt,height,width,steps,guidance){
 
 }
 
+/*function startPythonCheck() {
+    window.electron.startPython();
+
+    pythonCheckInterval = setInterval(() => {
+        window.electron.log("Checking if Python is up..."); 
+        console.log(global.pythonActive)
+        if(global.pythonActive){
+            window.electron.log("Python is active.")
+        }
+
+    }, 1000); // Check every second
+}*/
+
 //when loaded, launch python and wait the user to submit the prompt
 document.addEventListener('DOMContentLoaded', () => {
-    window.electron.startPython()
+
+    window.electron.startPython();
+    //startPythonCheck()
+
     let form = document.querySelector(".promptform");
     form.addEventListener("submit", function (e) {
         e.preventDefault()
