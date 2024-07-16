@@ -1,10 +1,15 @@
 import sys
 
-def process_input(input_str):
+def send_input(input_str):
     print(f"Received from Electron: {input_str}")
-    # Add your processing logic here
-    # For example, you can return a string
+    
     return "Processed in Python: " + input_str
+
+def process_input(input_str):
+    x = 0
+    return
+
+
 
 if __name__ == "__main__":
     print("Python script started")
@@ -12,10 +17,13 @@ if __name__ == "__main__":
         try:
             line = input()
             if line:
-                result = process_input(line)
-                print(result)
-                if(line.startswith("Prompt:")):
-                    print("paolino")
+                #result = send_input(line)
+                #print(result)
+                if(line.startswith('{"prompt":')):
+                    process_input(line)
+                    print(f"Ok!:{line}")
+                else:
+                    print("Error: input is:"+line)
             else:
                 break
         except EOFError:

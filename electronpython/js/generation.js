@@ -5,7 +5,8 @@ function send(str) {
 }
 
 function generateRequest (prompt,height,width,steps,guidance){
-    let request = `{prompt:${prompt},height:${height},width:${width},steps:${steps},guidance:${guidance}}`
+    prompt = prompt.replace(/['"<>\\/&%;='()+{}[\]|$`]/g, '');
+    let request = `{"prompt":"${prompt}","height":${height},"width":${width},"steps":${steps},"guidance":${guidance}}`
     
     return request
 
