@@ -76,6 +76,9 @@ body {
     border-radius: 50%;
     margin-right: 5px;
 }
+.sidebar nav ul li p a{
+    color: var(--font-color);
+}
 
 .main-content {
     flex: 1;

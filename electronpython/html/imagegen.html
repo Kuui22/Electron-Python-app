@@ -21,8 +21,8 @@
                 <ul>
                     <li><a href="../index.html" data-tooltip="hello" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Dashboard</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Lorem ipsum</a></li>
-                    <li><a href="../html/imagegen.html" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Image generation</a></li>
-                    <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Image gallery</a></li>
+                    <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Dolor sit amet</a></li>
+                    <li><a href="../html/imagegallery.html" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Image gallery</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Settings</a></li>
                     <li><a href="#" class="nodrag"><img src="../images/marisa.jpg" alt="" class="nodrag">Log Out</a></li>
                     <li><button id="logButton">Send log</button></li>
@@ -31,14 +31,19 @@
                 </ul>
             </nav>
         </div>
-        <div class="gallery">
-        <div class="gallery-container">
-            <button id="gallery-left" class="arrow left-arrow">&#10094;</button>
-            <img id="gallery-image" src="" alt="Image 1">
-            <button id="gallery-right"class="arrow right-arrow">&#10095;</button>
-        </div></div>
-    <script src="../js/renderer.js"></script>
-    <script src="../js/gallery.js"></script>    
-    <!-- <script src="js/dropdown.js"></script> -->
-</body>
-</html>
+        <div class="request">
+            <form class="promptform">
+                <input name="string_to_send" type="text" placeholder="Enter the string to send to program"/>
+                <button id="promptButton">Send prompt</button>
+            </form>
+        </div>
+        <div class="imagewait">
+
+        </div>
+        <div class="imagegen">
+
+        </div>
+        <script src="../js/generation.js"></script>
+        <script src="../js/renderer.js"></script>
+    </body>
+    </html>

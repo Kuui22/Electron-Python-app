@@ -30,6 +30,13 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
+// Ensure Python process is killed on quit
+app.on('before-quit', () => {
+  if (global.pythonChild) {
+      global.pythonChild.kill();
+  }
+});
+
 
 ipcMain.handle('get-images', async (event, reldirectory) => {
   const directory = path.join(__dirname, reldirectory);
