@@ -1,9 +1,10 @@
 async function loadImages() {
-    const directory = '/images'; // Update with your images folder path
+    const directory = '/images'; // image folder path here
     const images = await window.imageAPI.getImagesFromDirectory(directory);
     return images;
 }
 
+//initialize the gallery while the page is opening
 async function initializeGallery() {
     const images = await loadImages();
     let currentIndex = 0;

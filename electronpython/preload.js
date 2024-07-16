@@ -49,8 +49,10 @@ function printBoth(str) {
   console.log("preload:" + str);
   terminalConsole.log("preload:" + str);
 }
+//start the python process
 function startPython() {
   terminalConsole.log('Starting python...');
+  // :TODO Replace the python and [] to the path of the executable when ready
   child = spawn("python", ["./python/generation.py"], { stdio: ["pipe", "pipe", "pipe"] });
   child.stdout.on("data", (data) => {
     printBoth(`Python: ${data}`);
@@ -66,6 +68,7 @@ function startPython() {
 
   global.pythonChild = child;
 }
+//send a message to the python process that is currently listening
 const sendToPython = (str) => {
   if (child && child.stdin.writable) {
     child.stdin.write(str + "\n");
@@ -86,6 +89,11 @@ contextBridge.exposeInMainWorld('electron', {
   },
   sendPython:(str) => {
     sendToPython(str)
+  },
+  killPython: () => {
+    if (child) {
+      child.kill();
+    }
   }
 });
 //retrieve images path from a directory

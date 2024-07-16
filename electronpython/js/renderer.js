@@ -1,4 +1,6 @@
 let mode
+
+//this checks the display mode (Light or Dark mode) in the indexedDB using dexie
 async function checkMode() {
     return window.dexie.modeExists().then((value) => {
         window.electron.log(value);
@@ -14,19 +16,23 @@ async function checkMode() {
         }
     });
 }
+
+//base function to add an index to indexedDB if it's the first time launching the app
 async function addData() {
     const data = { id: 1, current: 'Dark' };
     await window.dexie.addData(data);
 }
-//checkMode()
 async function getData() {
     const allModes = await window.dexie.getAllData();
     window.electron.log(allModes);
     console.log(allModes);
 }
+
+//updates the mode from indexedDB when changed
 async function updateMode(newMode) {
     await window.dexie.updateCurrentMode(newMode);
 }
+//don't use it....
 async function clearData() {
     await window.dexie.clearData();
 }
@@ -50,11 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     //check current mode and set colors fitting it
     const modeswitcher = document.getElementById('switchMode');
     const logbutton = document.getElementById('logButton');
-    const addbutton = document.getElementById('addButton');
+    const checkbutton = document.getElementById('checkButton');
     checkMode().finally(() => {
         setcolor();
     });
-
+    //this sets the color (called above when entering the page)
     function setcolor() {
         if (mode == 'Light') {
             root.style.setProperty('--main-color', colors.main_color);
@@ -94,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //updateMode(0,localStorage.getItem("mode"));
         getData();
     });
-    addbutton?.addEventListener('click', () => {
+    checkbutton?.addEventListener('click', () => {
         checkMode();
     });
     //click on the mode button

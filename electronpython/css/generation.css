@@ -1,0 +1,55 @@
+.request form div #prompt{
+    width: 30vw;
+    height: 20vh;
+}
+
+.request form div input{
+    width: 10vw;
+    height: 5vh;
+}
+body > div.request > form > div.request-prompt{
+    justify-content: center;
+    display: flex;
+}
+body > div.request > form > div.request-model{
+    justify-content: center;
+    display: flex;
+}
+body > div.request > form > div.request-send{
+    justify-content: center;
+    display: flex;
+}
+.request-prompt > input{
+    margin-top: 1vh;
+}
+.request-model > .custom-select-wrapper{
+    margin-top: 3vh;
+}
+.request-vars input{
+    margin-top: 3vh;
+}
+.request-send button{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.request{
+    /*margin-left: 5vw;*/
+    margin-top: 2vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    min-width: 80vw;
+    min-height: 100vh;
+    
+}
+
+
+
+.request form div{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.request form div div{
+    background-color: rgba(255, 255, 255, 0.0);
+}

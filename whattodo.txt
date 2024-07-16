@@ -11,3 +11,16 @@ You can use Electron's IPC (Inter-Process Communication) to achieve this.
 Use a preload script to expose a logging function to the renderer process that sends messages to the main process.
 In your renderer process, use the exposed electron.log function to send log messages to the main process.
 Make sure to include your renderer script in the HTML file.
+
+
+EXPOSING A FUNCTION FROM PRELOAD:
+
+in preload:
+contextBridge.exposeInMainWorld('yourdesiredAPInamehere', {
+function1: (args?) => {//do stuff},
+function2: () => {//do more stuff!}
+});
+
+in your js file:
+
+window.yourdesiredAPInamehere.function1(args)

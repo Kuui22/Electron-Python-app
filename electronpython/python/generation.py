@@ -14,6 +14,8 @@ if __name__ == "__main__":
             if line:
                 result = process_input(line)
                 print(result)
+                if(line.startswith("Prompt:")):
+                    print("paolino")
             else:
                 break
         except EOFError:
