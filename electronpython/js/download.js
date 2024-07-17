@@ -4,7 +4,7 @@ function send(str) {
 function generateRequest (name,link){
     name = name.replace(/['"<>\\/:?&%;='()+{}[\]|$`]/g, '');
     //link = link.replace(/['"<>\\&%;='()+{}[\]|$`]/g, '');
-    let request = `{"name":"${name}","link":${link}}`
+    let request = `{"name":"${name}","link":"${link}"}`
     
     return request
 
@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //generate string and send it to python
         if (name && link) {
             input = generateRequest(name,link)
+            window.electron.log(input)
             send(input)
         }
         else {

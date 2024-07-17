@@ -104,7 +104,7 @@ def check_path():
 
 
 if __name__ == "__main__":
-    print("Python script started")
+    print("Python generation script started")
     check_path()
     #print(f"Model path:{localmodel}")
     #print(f"img path:{directory}")

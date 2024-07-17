@@ -50,15 +50,21 @@ def make_folder(name):
 
 def test_link(link):
     link:str = "https://huggingface.co/"+link
-    r = requests.get(link)
-    if(r.status_code == 200):
-        return True
-    else:
-        print(f"Error in request:{r.status_code}")
+    try:
+        r = requests.get(link)
+        if(r.status_code == 200):
+            return True
+        else:
+            print(f"Error in request:{r.status_code}")
+            return False
+    except Exception as e:
+        print(f"Error in request:{e}")
         return False
 
 def download_model(link,name):
-    if test_link(link):
+    tester = test_link(link)
+    if tester:
+        print(f"IM HERE: {tester}")
         pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
         make_folder(name)
         pipe.save_pretrained(savedir)
@@ -77,7 +83,7 @@ def process_input(input_str):
     return jsoninput
 
 if __name__ == "__main__":
-    print("Python script started")
+    print("Python download script started")
     check_path()
     #print(f"Model path:{localmodel}")
     #print(f"img path:{directory}")
