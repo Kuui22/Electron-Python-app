@@ -68,6 +68,24 @@ function startPythongen() {
 
   global.pythonChild = child;
 }
+function startPythonDownload() {
+  terminalConsole.log('Starting python...');
+  // :TODO Replace the python and [] to the path of the executable when ready
+  child = spawn("python", ["./python/download.py"], { stdio: ["pipe", "pipe", "pipe"] });
+  child.stdout.on("data", (data) => {
+    printBoth(`Python: ${data}`);
+  });
+
+  child.stderr.on("data", (data) => {
+    printBoth(`Python error: ${data}`);
+  });
+
+  child.on("close", (code) => {
+    printBoth(`Python process exited with code ${code}`);
+  });
+
+  global.pythonChild = child;
+}
 //send a message to the python process that is currently listening
 const sendToPython = (str) => {
   if (child && child.stdin.writable) {
@@ -86,6 +104,9 @@ contextBridge.exposeInMainWorld('electron', {
   },
   startPythongen: () => {
     startPythongen()
+  },
+  startPythonDownload: () => {
+    startPythonDownload()
   },
   sendPython:(str) => {
     sendToPython(str)

@@ -36,14 +36,14 @@
         </nav>
     </div>
     <div class="request">
-        <form class="promptform">
-            <div class="request-prompt">
+        <form class="downloadform">
+            <div class="request-download">
                 <input name="modelname" id="modelname" type="text"
-                    placeholder="Model's name" />
+                    placeholder="Model's name" required />
             </div>
-            <div class="request-prompt">
+            <div class="request-download">
                 <input name="modellink" id="modellink" type="text"
-                    placeholder="Model's HF link (ex: runwayml/stable-diffusion-v1-5/)" />
+                    placeholder="Model's HF link (ex: runwayml/stable-diffusion-v1-5/)" required />
             </div>
             <div class="request-send">
                 <button id="downloadButton">Send prompt</button>
@@ -51,6 +51,7 @@
         </form>
     </div>
     <script src="../js/renderer.js"></script>
+    <script src="../js/download.js"></script>
     <!-- <script src="js/dropdown.js"></script> -->
 </body>
 
