@@ -50,7 +50,7 @@ function printBoth(str) {
   terminalConsole.log("preload:" + str);
 }
 //start the python process
-function startPython() {
+function startPythongen() {
   terminalConsole.log('Starting python...');
   // :TODO Replace the python and [] to the path of the executable when ready
   child = spawn("python", ["./python/generation.py"], { stdio: ["pipe", "pipe", "pipe"] });
@@ -84,8 +84,8 @@ contextBridge.exposeInMainWorld('electron', {
     console.log(`Javascript: ${str}`);
     terminalConsole.log(`Javascript: ${str}`);
   },
-  startPython: () => {
-    startPython()
+  startPythongen: () => {
+    startPythongen()
   },
   sendPython:(str) => {
     sendToPython(str)

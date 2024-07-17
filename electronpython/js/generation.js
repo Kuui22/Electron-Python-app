@@ -12,7 +12,7 @@ function generateRequest (prompt,height,width,steps,guidance){
 }
 
 /*function startPythonCheck() {
-    window.electron.startPython();
+    window.electron.startPythongen();
 
     pythonCheckInterval = setInterval(() => {
         window.electron.log("Checking if Python is up..."); 
@@ -27,7 +27,7 @@ function generateRequest (prompt,height,width,steps,guidance){
 //when loaded, launch python and wait the user to submit the prompt
 document.addEventListener('DOMContentLoaded', () => {
 
-    window.electron.startPython();
+    window.electron.startPythongen();
     //startPythonCheck()
 
     let form = document.querySelector(".promptform");
