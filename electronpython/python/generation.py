@@ -26,7 +26,7 @@ def process_input(input_str):
 def generate_random_string(length=6):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for _ in range(length))
-def FlushPipe(pipe,image=None):
+def flush_pipe(pipe,image=None):
     try:
         pipe.maybe_free_model_hooks()
         del pipe
@@ -37,7 +37,7 @@ def FlushPipe(pipe,image=None):
     except Exception as e:
         print(f"Failed to clear: {e}")
         
-def SaveImage(image,prompt):
+def save_image(image,prompt):
     try:
         base_filename:str = f"{prompt[:10].replace(' ', '_')}"
         image_path:str = os.path.join(directory,f"{base_filename}.png").replace("\\", "/")
@@ -50,9 +50,8 @@ def SaveImage(image,prompt):
     except Exception as e:
         print(f"Error saving: {e}")
         
-def GenerateImage(prompt,negative_prompt="",height=512,width=512,guidance_scale=7.0,num_inference_steps=35):
+def generate_image(prompt,negative_prompt="",height=512,width=512,guidance_scale=7.0,num_inference_steps=35):
     try:
-        enabled = False
         pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(localmodel, torch_dtype=torch.float16, safety_checker=None)
         pipe.enable_model_cpu_offload()
     except Exception as e:
@@ -67,15 +66,27 @@ def GenerateImage(prompt,negative_prompt="",height=512,width=512,guidance_scale=
             height=height,
             width=width,
         ).images[0]   
-        SaveImage(image,prompt)
-        FlushPipe(pipe,image)
-        enabled = True
-        print("Generation done!")
+        save_image(image,prompt)
+        flush_pipe(pipe,image)
     except Exception as e:
         print(f"Error generating: {e}")
 
 
-def CheckPath():
+def generation_worker(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps):
+    global enabled
+    try:
+        generate_image(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps)
+    finally:
+        enabled = True
+        print("Generation done!")
+        sys.stdout.flush()
+        
+
+
+
+
+
+def check_path():
     global localmodel
     global directory
     cwd = os.getcwd()
@@ -89,9 +100,12 @@ def CheckPath():
         print("Model path does not exist")
 
 
+
+
+
 if __name__ == "__main__":
     print("Python script started")
-    CheckPath()
+    check_path()
     #print(f"Model path:{localmodel}")
     #print(f"img path:{directory}")
     while True:
@@ -100,23 +114,21 @@ if __name__ == "__main__":
             if line:
                 #result = send_input(line)
                 #print(result)
-                if(line.startswith('{"prompt":')):
+                if line.startswith('{"prompt":'):
                     try:
                         jsline = process_input(line)
                         print(f"Ok! Prompt is:{jsline["prompt"]}")
-                        if(torch.cuda.is_available()):
-                            if(enabled):
+                        if torch.cuda.is_available():
+                            if enabled:
                                 enabled= False
-                                try:
-                                    letters = generate_random_string()
-                                    prompt:str = jsline["prompt"]
-                                    height:str = jsline["height"]
-                                    width:str = jsline["width"]
-                                    guidance_scale:str = jsline["guidance"]
-                                    num_inference_steps:str = jsline["steps"]
-                                    GenerateImage(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps)
-                                finally:
-                                    enabled = True
+                                letters = generate_random_string()
+                                prompt:str = jsline["prompt"]
+                                height:str = jsline["height"]
+                                width:str = jsline["width"]
+                                guidance_scale:str = jsline["guidance"]
+                                num_inference_steps:str = jsline["steps"]
+                                thread = threading.Thread(target=generation_worker, args=(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps))
+                                thread.start()
                             else:
                                 raise Exception("Still generating")
                         else:
