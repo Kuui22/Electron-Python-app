@@ -1,0 +1,45 @@
+body > div.request > form > div.request-prompt{
+    justify-content: center;
+    display: flex;
+}
+body > div.request > form > div.request-send{
+    justify-content: center;
+    display: flex;
+}
+
+.request-send button{
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.request form div #modellink{
+    width: 30vw;
+    height: 5vh;
+    margin-top: 3vh;
+}
+
+.request form div #modelname{
+    width: 30vw;
+    height: 5vh;
+    margin-top: 3vh;
+}
+
+
+.request{
+    /*margin-left: 5vw;*/
+    margin-top: 2vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    min-width: 80vw;
+    min-height: 100vh;
+    
+}
+
+.request form div{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.request form div div{
+    background-color: rgba(255, 255, 255, 0.0);
+}

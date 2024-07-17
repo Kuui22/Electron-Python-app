@@ -61,7 +61,7 @@ def download_model(link,name):
     if test_link(link):
         pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
         make_folder(name)
-        pipe.save_pretrained(directory)
+        pipe.save_pretrained(savedir)
     else:
         print(f"The provided link doesn't work:{link}")
 

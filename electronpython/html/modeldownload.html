@@ -6,10 +6,10 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image generation</title>
+    <title>Model download</title>
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/dropdown.css">
-    <link rel="stylesheet" href="../css/generation.css">
+    <link rel="stylesheet" href="../css/download.css">
 </head>
 
 <body>
@@ -38,8 +38,15 @@
     <div class="request">
         <form class="promptform">
             <div class="request-prompt">
-                <input name="prompt" id="prompt" type="text"
-                    placeholder="Enter the string to send to program (some symbols won't work)" />
+                <input name="modelname" id="modelname" type="text"
+                    placeholder="Model's name" />
+            </div>
+            <div class="request-prompt">
+                <input name="modellink" id="modellink" type="text"
+                    placeholder="Model's HF link (ex: runwayml/stable-diffusion-v1-5/)" />
+            </div>
+            <div class="request-send">
+                <button id="downloadButton">Send prompt</button>
             </div>
         </form>
     </div>
