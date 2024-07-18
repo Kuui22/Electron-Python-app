@@ -52,13 +52,14 @@ def save_image(image,prompt):
         print(f"Error saving: {e}")
         
 def generate_image(model:str,prompt,negative_prompt="",height=512,width=512,guidance_scale=7.0,num_inference_steps=35):
+    modeltype = "generic" #change here when wanting to try other types
+    
     try:
-        if (model == 'animagine3-1'):
-            pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained('cagliostrolab/animagine-xl-3.1', torch_dtype=torch.float16, use_safetensors=True)
-            pipe.unet.config.addition_embed_type = None
+        if (modeltype == 'generic'):
+            pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained(localmodel, torch_dtype=torch.float16, use_safetensors=True)
+            #pipe.unet.config.addition_embed_type = None
             pipe.enable_model_cpu_offload()
         else:
-            print("HEREEEEE")
             pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(localmodel, torch_dtype=torch.float16, use_safetensors=True, safety_checker=None)
             pipe.enable_model_cpu_offload()
         
@@ -66,7 +67,8 @@ def generate_image(model:str,prompt,negative_prompt="",height=512,width=512,guid
         print(f"Error setting model: {e}")
     try:
         print(f"Generating image: Prompt={prompt} \n Height/Width={height}/{width} \n Guidance scale/Steps={guidance_scale}/{num_inference_steps}" )
-        if (model == 'animagine3-1'):
+        if ('animagine' in model ): #specific for testing!
+            print(f"I'm an animagine model.")
             image:Image = pipe(
                 prompt,
                 negative_prompt=negative_prompt,

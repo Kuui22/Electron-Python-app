@@ -23,6 +23,11 @@ body > div.request > form > div.request-send{
     height: 5vh;
     margin-top: 3vh;
 }
+.request form div #modelpipe{
+    width: 30vw;
+    height: 5vh;
+    margin-top: 3vh;
+}
 
 
 .request{

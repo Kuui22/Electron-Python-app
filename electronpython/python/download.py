@@ -1,9 +1,10 @@
 import sys
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionPipeline, DiffusionPipeline
 import accelerate
 import gc,os,json
 import threading
 import requests
+import torch
 
 directory:str = '../static'
 savedir:str = ""
@@ -71,20 +72,30 @@ def test_link(link):
         print(f"Error in request:{e}")
         return False
 
-def download_model(link,name):
+def download_model(link,name,pipetype):
     tester = test_link(link)
     if tester:
-        if make_folder(name):
-            pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
-            pipe.save_pretrained(savedir)
-            flush_pipe(pipe)
+        if(pipetype=='StableDiffusionPipeline'):
+            if make_folder(name):
+                pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
+                pipe.save_pretrained(savedir)
+                flush_pipe(pipe)
+        elif(pipetype=='DiffusionPipeline'):
+            if make_folder(name):
+                pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
+                pipe.save_pretrained(savedir)
+                flush_pipe(pipe)
+        else:
+                print(f"The provided pipe type is not supported:{pipetype}")
+
+            
     else:
         print(f"The provided link doesn't work:{link}")
 
-def download_worker(link,name):
+def download_worker(link,name,pipetype):
     global enabled
     try:
-        download_model(link,name)
+        download_model(link,name,pipetype)
     finally:
         enabled = True
         print("Download complete!")
@@ -106,8 +117,9 @@ if __name__ == "__main__":
                     jsline = process_input(line)
                     name:str = jsline["name"]
                     link:str = jsline["link"]
+                    pipetype:str = jsline["pipe"]
                     enabled = False
-                    thread = threading.Thread(target=download_worker, args=(link,name))
+                    thread = threading.Thread(target=download_worker, args=(link,name,pipetype))
                     thread.start()
                 else:
                     print("I'm already downloading a model!")
