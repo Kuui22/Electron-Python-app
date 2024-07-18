@@ -2,12 +2,13 @@ import sys
 import json 
 import gc,torch,string,random,os,asyncio
 import accelerate
-from diffusers import StableDiffusionPipeline
+from diffusers import StableDiffusionPipeline,DiffusionPipeline
 from PIL import Image
 import threading
 import os
-#localmodel:str = "C://Users/Alessio Tammaro/Documents/GitHub/Electron-Python-app/electronpython/static/stable1-5"
+
 localmodel:str = "/static/stable1-5"
+localdir:str = "/static/text-to-image/"
 modelurl:str = "runwayml/stable-diffusion-v1-5"
 directory:str = '../images'
 negativeprompt:str = "Ugly,Bad anatomy,Bad proportions,Bad quality,Blurry,Cropped,Deformed,Disconnected limbs, Out of frame,Out of focus,Dehydrated,Error, Disfigured,Disgusting, Extra arms,Extra limbs,Extra hands,Fused fingers,Gross proportions,Long neck,Low res,Low quality,Jpeg,Jpeg artifacts,Malformed limbs,Mutated ,Mutated hands,Mutated limbs,Missing arms,Missing fingers,Picture frame,Poorly drawn hands,Poorly drawn face,Text,Signature,Username,Watermark,Worst quality,Collage ,Pixel,Pixelated,Grainy "
@@ -50,32 +51,55 @@ def save_image(image,prompt):
     except Exception as e:
         print(f"Error saving: {e}")
         
-def generate_image(prompt,negative_prompt="",height=512,width=512,guidance_scale=7.0,num_inference_steps=35):
+def generate_image(model:str,prompt,negative_prompt="",height=512,width=512,guidance_scale=7.0,num_inference_steps=35):
     try:
-        pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(localmodel, torch_dtype=torch.float16, safety_checker=None)
-        pipe.enable_model_cpu_offload()
+        if (model == 'animagine3-1'):
+            pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained('cagliostrolab/animagine-xl-3.1', torch_dtype=torch.float16, use_safetensors=True)
+            pipe.unet.config.addition_embed_type = None
+            pipe.enable_model_cpu_offload()
+        else:
+            print("HEREEEEE")
+            pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(localmodel, torch_dtype=torch.float16, use_safetensors=True, safety_checker=None)
+            pipe.enable_model_cpu_offload()
+        
     except Exception as e:
         print(f"Error setting model: {e}")
     try:
         print(f"Generating image: Prompt={prompt} \n Height/Width={height}/{width} \n Guidance scale/Steps={guidance_scale}/{num_inference_steps}" )
-        image:Image = pipe(
-            prompt,
-            negative_prompt=negative_prompt,
-            num_inference_steps=num_inference_steps,
-            guidance_scale=guidance_scale,
-            height=height,
-            width=width,
-        ).images[0]   
+        if (model == 'animagine3-1'):
+            image:Image = pipe(
+                prompt,
+                negative_prompt=negative_prompt,
+                num_inference_steps=num_inference_steps,
+                guidance_scale=guidance_scale,
+                height=height,
+                width=width,
+                sampler= "Euler a",
+                sdxl_style="(None)",
+                add_quality_tags= True,
+                quality_tags= "Heavy v3.1"
+            ).images[0]
+        else:
+            image:Image = pipe(
+                prompt,
+                negative_prompt=negative_prompt,
+                num_inference_steps=num_inference_steps,
+                guidance_scale=guidance_scale,
+                height=height,
+                width=width,
+            ).images[0]
+
         save_image(image,prompt)
         flush_pipe(pipe,image)
     except Exception as e:
         print(f"Error generating: {e}")
+        flush_pipe(pipe)
 
 
-def generation_worker(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps):
+def generation_worker(model:str,prompt,negativeprompt,height,width,guidance_scale,num_inference_steps):
     global enabled
     try:
-        generate_image(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps)
+        generate_image(model,prompt,negativeprompt,height,width,guidance_scale,num_inference_steps)
     finally:
         enabled = True
         print("Generation done!")
@@ -86,12 +110,12 @@ def generation_worker(prompt,negativeprompt,height,width,guidance_scale,num_infe
 
 
 
-def check_path():
+def check_path(model:str):
     global localmodel
     global directory
     cwd = os.getcwd()
     #print(f"Current working directory: {cwd}")
-    model_path = os.path.join(cwd, 'static', 'stable1-5')
+    model_path = os.path.join(cwd, 'static', 'text-to-image', model)
     img_path = os.path.join(cwd, 'images')
     if os.path.exists(model_path):
         localmodel = model_path
@@ -105,7 +129,6 @@ def check_path():
 
 if __name__ == "__main__":
     print("Python generation script started")
-    check_path()
     #print(f"Model path:{localmodel}")
     #print(f"img path:{directory}")
     while True:
@@ -127,7 +150,9 @@ if __name__ == "__main__":
                                 width:str = jsline["width"]
                                 guidance_scale:str = jsline["guidance"]
                                 num_inference_steps:str = jsline["steps"]
-                                thread = threading.Thread(target=generation_worker, args=(prompt,negativeprompt,height,width,guidance_scale,num_inference_steps))
+                                model:str = jsline["model"]
+                                check_path(model)
+                                thread = threading.Thread(target=generation_worker, args=(model,prompt,negativeprompt,height,width,guidance_scale,num_inference_steps))
                                 thread.start()
                             else:
                                 raise Exception("Still generating")

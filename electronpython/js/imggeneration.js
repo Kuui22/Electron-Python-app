@@ -3,10 +3,10 @@ function send(str) {
     window.electron.sendPython(str)
 }
 
-function generateRequest (prompt,height,width,steps,guidance){
+function generateRequest(prompt, height, width, steps, guidance, model) {
     prompt = prompt.replace(/['"<>\\/&%;='()+{}[\]|$`]/g, '');
-    let request = `{"prompt":"${prompt}","height":${height},"width":${width},"steps":${steps},"guidance":${guidance}}`
-    
+    let request = `{"prompt":"${prompt}","height":${height},"width":${width},"steps":${steps},"guidance":${guidance},"model":"${model}"}`
+
     return request
 
 }
@@ -33,6 +33,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let form = document.querySelector(".promptform");
     form.addEventListener("submit", function (e) {
         e.preventDefault()
+        const selectedOption = document.querySelector('.custom-option.selected');
+        let modelselected
+        if (selectedOption) {
+            //window.electron.log(selectedOption.textContent); // Outputs the text of the selected option
+            modelselected = selectedOption.textContent
+        }
         //set default values here with || x
         let formdata = new FormData(this);
         let prompt = formdata.get("prompt");
@@ -41,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let steps = formdata.get("steps") || 28;
         let guidance = formdata.get("guidance") || 7;
         //generate string and send it to python
-        if (prompt) {
-            input = generateRequest(prompt,height,width,steps,guidance)
+        if (prompt && modelselected) {
+            input = generateRequest(prompt, height, width, steps, guidance, modelselected)
             send(input)
         }
         else {

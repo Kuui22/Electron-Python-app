@@ -9,21 +9,13 @@ async function getModels(directoryPath) {
     }
 
 }
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-    const customSelect = document.querySelector('.custom-select');
-    const customSelectTrigger = customSelect.querySelector('.custom-select-trigger');
-    const customOptions = customSelect.querySelector('.custom-options');
-    
-    const directoryPath = 'text-to-image';
-
+function initializeDropdown(customSelect,customSelectTrigger,customOptions,directoryPath){
+    let selectedModel = '';
     (async () => {
         try {
             
             const directoryNames = await getModels(directoryPath);
-            console.log(directoryNames); // Now you have the result in `folders`
+            //console.log(directoryNames); 
             // Populate the dropdown with directory names
             directoryNames.forEach(name => {
                 const option = document.createElement('div');
@@ -37,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 //window.electron.log('Custom select trigger');
                 customOptions.classList.toggle('closed');
                 customOptions.classList.toggle('open');
-                //console.log('Options class list:', customOptions.classList); // Debugging: Check class list
             });
 
             customOptionsList.forEach(option => {
@@ -45,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     customOptionsList.forEach(option => option.classList.remove('selected'));
                     option.classList.add('selected');
                     customSelectTrigger.querySelector('span').textContent = option.textContent;
+                    selectedModel = option.textContent;
                     customOptions.classList.remove('open');
                     customOptions.classList.add('closed')
                 });
@@ -60,6 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
         }
     })();
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const customSelect = document.querySelector('.custom-select');
+    const customSelectTrigger = customSelect.querySelector('.custom-select-trigger');
+    const customOptions = customSelect.querySelector('.custom-options');
+    
+    const directoryPath = 'text-to-image';
+    initializeDropdown(customSelect,customSelectTrigger,customOptions,directoryPath)
+
 
 
 
