@@ -7,6 +7,8 @@ import requests
 
 directory:str = '../static'
 savedir:str = ""
+pipe_tag:str = ""
+
 enabled = True
 
 def flush_pipe(pipe,image=None):
@@ -37,22 +39,30 @@ def check_path():
 def make_folder(name):
     global savedir
     cwd = os.getcwd()
-    model_path = os.path.join(cwd, 'static', name)
+    model_path = os.path.join(cwd, 'static', pipe_tag, name)
     if os.path.exists(model_path):
         print("Folder already exists!")
+        return False
     else:
         try:
             os.mkdir(model_path)
             savedir = model_path
         except Exception as e:
             print(f"Could not create folder:{e}")
+            return False
+        finally:
+            return True
 
 
 def test_link(link):
+    global pipe_tag
     link:str = "https://huggingface.co/api/models/"+link
     try:
         r = requests.get(link)
         if(r.status_code == 200):
+            data = r.json()
+            pipe_tag = data["pipeline_tag"]
+            print(f"Pipeline tag:{pipe_tag}")
             return True
         else:
             print(f"Error in request:{r.status_code}")
@@ -64,11 +74,10 @@ def test_link(link):
 def download_model(link,name):
     tester = test_link(link)
     if tester:
-        print(f"IM HERE: {tester}")
-        pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
-        make_folder(name)
-        pipe.save_pretrained(savedir)
-        flush_pipe(pipe)
+        if make_folder(name):
+            pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
+            pipe.save_pretrained(savedir)
+            flush_pipe(pipe)
     else:
         print(f"The provided link doesn't work:{link}")
 
