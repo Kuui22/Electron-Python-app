@@ -4,12 +4,13 @@ const { contextBridge, ipcRenderer } = require('electron');
 const Dexie = require('dexie');
 const { spawn } = require("child_process");
 const nodeConsole = require("console");
-
+const fs = require('fs');
+const path = require('path');
 // vars
 const terminalConsole = new nodeConsole.Console(process.stdout, process.stderr);
 let child;
 
-
+/* DEXIE DB FUNCTIONS */ 
 
 //creating db from dexie
 const db = new Dexie('myDb');
@@ -49,11 +50,12 @@ function printBoth(str) {
   console.log("preload:" + str);
   terminalConsole.log("preload:" + str);
 }
+/* PYTHON FUNCTIONS*/
 //start the python process
 function startPythongen() {
   terminalConsole.log('Starting python...');
   // :TODO Replace the python and [] to the path of the executable when ready
-  child = spawn("python", ["./python/generation.py"], { stdio: ["pipe", "pipe", "pipe"] });
+  child = spawn("python", ["./python/imggeneration.py"], { stdio: ["pipe", "pipe", "pipe"] });
   child.stdout.on("data", (data) => {
     printBoth(`Python: ${data}`);
   });
@@ -95,6 +97,18 @@ const sendToPython = (str) => {
   }
 }
 
+function getModelsFromType(type) {
+  cwd = process.cwd()
+  directoryPath = cwd+"\\static\\"+type
+  directorynames = fs.readdirSync(directoryPath).filter(file => fs.statSync(path.join(directoryPath, file)).isDirectory());
+  /*async (directoryPath) => {
+    return fs.readdirSync(directoryPath).filter(file => fs.statSync(path.join(directoryPath, file)).isDirectory());
+  }*/
+  //ipcRenderer.send('log-message',"cwd:"+cwd)
+  //ipcRenderer.send('log-message',"dir:"+directoryPath)
+  //ipcRenderer.send('log-message',"x:"+x)
+  return directorynames
+}
 
 contextBridge.exposeInMainWorld('electron', {
   log: (...args) => { ipcRenderer.send('log-message', ...args) },
@@ -115,6 +129,11 @@ contextBridge.exposeInMainWorld('electron', {
     if (child) {
       child.kill();
     }
+  },
+  getModelsFolder:async(type) =>{
+    return models = await getModelsFromType(type)
+    //ipcRenderer.send('log-message',"models:"+models)
+    
   }
 });
 //retrieve images path from a directory
