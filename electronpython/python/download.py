@@ -49,7 +49,7 @@ def make_folder(name):
 
 
 def test_link(link):
-    link:str = "https://huggingface.co/"+link
+    link:str = "https://huggingface.co/api/models/"+link
     try:
         r = requests.get(link)
         if(r.status_code == 200):
@@ -68,6 +68,7 @@ def download_model(link,name):
         pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link)
         make_folder(name)
         pipe.save_pretrained(savedir)
+        flush_pipe(pipe)
     else:
         print(f"The provided link doesn't work:{link}")
 
@@ -77,6 +78,7 @@ def download_worker(link,name):
         download_model(link,name)
     finally:
         enabled = True
+        print("Download complete!")
         sys.stdout.flush()
 def process_input(input_str):
     jsoninput = json.loads(input_str)
@@ -98,6 +100,9 @@ if __name__ == "__main__":
                     enabled = False
                     thread = threading.Thread(target=download_worker, args=(link,name))
                     thread.start()
+                else:
+                    print("I'm already downloading a model!")
+                    sys.stdout.flush()
             else:
                 break
         except EOFError:
