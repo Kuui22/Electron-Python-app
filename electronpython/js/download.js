@@ -1,11 +1,11 @@
 function send(str) {
     window.electron.sendPython(str)
 }
-function generateRequest (name,link,pipe){
+function generateRequest (name,link){
     name = name.replace(/['"<>\\/:?&%;='()+{}[\]|$`]/g, '');
-    pipe = pipe.replace(/['"<>\\/:?&%;='()+{}[\]|$`]/g, '');
+    //pipe = pipe.replace(/['"<>\\/:?&%;='()+{}[\]|$`]/g, '');
     //link = link.replace(/['"<>\\&%;='()+{}[\]|$`]/g, '');
-    let request = `{"name":"${name}","link":"${link}","pipe":"${pipe}"}`
+    let request = `{"name":"${name}","link":"${link}"}`
     
     return request
 
@@ -21,10 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let formdata = new FormData(this);
         let name = formdata.get("modelname");
         let link = formdata.get("modellink");
-        let pipe = formdata.get("modelpipe");
         //generate string and send it to python
-        if (name && link && pipe) {
-            input = generateRequest(name,link,pipe)
+        if (name && link) {
+            input = generateRequest(name,link)
             window.electron.log(input)
             send(input)
         }

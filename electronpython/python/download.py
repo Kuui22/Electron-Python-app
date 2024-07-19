@@ -64,6 +64,10 @@ def test_link(link):
             data = r.json()
             pipe_tag = data["pipeline_tag"]
             print(f"Pipeline tag:{pipe_tag}")
+            if(data['tags']):
+                for key in data['tags']:
+                    if key == 'lora' or key == 'template:sd-lora':
+                        raise Exception('LORA are not supported!')
             return True
         else:
             print(f"Error in request:{r.status_code}")
@@ -72,30 +76,31 @@ def test_link(link):
         print(f"Error in request:{e}")
         return False
 
-def download_model(link,name,pipetype):
+def download_model(link,name):
     tester = test_link(link)
+    global pipe_tag
     if tester:
-        if(pipetype=='StableDiffusionPipeline'):
-            if make_folder(name):
-                pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
-                pipe.save_pretrained(savedir)
-                flush_pipe(pipe)
-        elif(pipetype=='DiffusionPipeline'):
+        #if(pipetype=='StableDiffusionPipeline'):
+        #    if make_folder(name):
+        #        pipe:StableDiffusionPipeline = StableDiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
+        #        pipe.save_pretrained(savedir)
+        #        flush_pipe(pipe)
+        if(pipe_tag=='text-to-image'):
             if make_folder(name):
                 pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
                 pipe.save_pretrained(savedir)
                 flush_pipe(pipe)
         else:
-                print(f"The provided pipe type is not supported:{pipetype}")
+                print(f"The provided pipe type is not supported:{pipe_tag}")
 
             
     else:
         print(f"The provided link doesn't work:{link}")
 
-def download_worker(link,name,pipetype):
+def download_worker(link,name):
     global enabled
     try:
-        download_model(link,name,pipetype)
+        download_model(link,name)
     finally:
         enabled = True
         print("Download complete!")
@@ -117,9 +122,9 @@ if __name__ == "__main__":
                     jsline = process_input(line)
                     name:str = jsline["name"]
                     link:str = jsline["link"]
-                    pipetype:str = jsline["pipe"]
+                    #modeltype:str = jsline["pipe"]
                     enabled = False
-                    thread = threading.Thread(target=download_worker, args=(link,name,pipetype))
+                    thread = threading.Thread(target=download_worker, args=(link,name))
                     thread.start()
                 else:
                     print("I'm already downloading a model!")
