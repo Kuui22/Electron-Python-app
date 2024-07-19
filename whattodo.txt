@@ -24,3 +24,8 @@ function2: () => {//do more stuff!}
 in your js file:
 
 window.yourdesiredAPInamehere.function1(args)
+
+
+todo:
+
+in the initialiazer of the app make it create the static folder with the allowed types of models

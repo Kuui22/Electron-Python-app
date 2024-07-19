@@ -23,13 +23,14 @@ body > div.request > form > div.request-send{
     height: 5vh;
     margin-top: 3vh;
 }
-.request form div #modelpipe{
-    width: 30vw;
-    height: 5vh;
+
+body > div.request > form > div.request-model{
+    justify-content: center;
+    display: flex;
+}
+.request-model > .custom-select-wrapper{
     margin-top: 3vh;
 }
-
-
 .request{
     /*margin-left: 5vw;*/
     margin-top: 2vh;

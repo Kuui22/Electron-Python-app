@@ -76,9 +76,13 @@ def test_link(link):
         print(f"Error in request:{e}")
         return False
 
-def download_model(link,name):
+def download_model(link,name,modeltype):
     tester = test_link(link)
     global pipe_tag
+    if(pipe_tag != modeltype):
+        print(f"pipe_tag:{pipe_tag} differs from model type:{modeltype}, defaulting to pipe_tag")
+    else:
+        print(f"pipe_tag:{pipe_tag} and model type:{modeltype} seem to match, good")
     if tester:
         #if(pipetype=='StableDiffusionPipeline'):
         #    if make_folder(name):
@@ -90,17 +94,24 @@ def download_model(link,name):
                 pipe:DiffusionPipeline = DiffusionPipeline.from_pretrained(link, torch_dtype=torch.float16, use_safetensors=True)
                 pipe.save_pretrained(savedir)
                 flush_pipe(pipe)
+        elif(pipe_tag =='zero-shot-object-detection'):
+            print(f"I got here!")
+            sys.stdout.flush()
+        elif(pipe_tag =='zero-shot-image-classification'):
+            print(f"I got here!")
+            sys.stdout.flush()
         else:
                 print(f"The provided pipe type is not supported:{pipe_tag}")
+                sys.stdout.flush()
 
             
     else:
         print(f"The provided link doesn't work:{link}")
 
-def download_worker(link,name):
+def download_worker(link,name,modeltype):
     global enabled
     try:
-        download_model(link,name)
+        download_model(link,name,modeltype)
     finally:
         enabled = True
         print("Download complete!")
@@ -122,9 +133,9 @@ if __name__ == "__main__":
                     jsline = process_input(line)
                     name:str = jsline["name"]
                     link:str = jsline["link"]
-                    #modeltype:str = jsline["pipe"]
+                    modeltype:str = jsline["type"]
                     enabled = False
-                    thread = threading.Thread(target=download_worker, args=(link,name))
+                    thread = threading.Thread(target=download_worker, args=(link,name,modeltype))
                     thread.start()
                 else:
                     print("I'm already downloading a model!")

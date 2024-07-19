@@ -45,6 +45,18 @@
                 <input name="modellink" id="modellink" type="text"
                     placeholder="Model's HF link (ex: runwayml/stable-diffusion-v1-5/)" required />
             </div>
+            <div class="request-model">
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <div class="custom-select-trigger">
+                            <span>Choose a model</span>
+                            <div class="arrow">▼</div>
+                        </div>
+                        <div class="custom-options closed">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="request-send">
                 <button id="downloadButton">Send request</button>
             </div>
@@ -53,7 +65,7 @@
     </div>
     <script src="../js/renderer.js"></script>
     <script src="../js/download.js"></script>
-    <!-- <script src="js/dropdown.js"></script> -->
+    <script src="../js/downloaddropdown.js"></script>
 </body>
 
 </html>
