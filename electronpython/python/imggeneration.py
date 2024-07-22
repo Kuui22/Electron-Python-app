@@ -11,7 +11,7 @@ localmodel:str = "/static/stable1-5"
 localdir:str = "/static/text-to-image/"
 modelurl:str = "runwayml/stable-diffusion-v1-5"
 directory:str = '../images'
-negativeprompt:str = "Ugly,Bad anatomy,Bad proportions,Bad quality,Blurry,Cropped,Deformed,Disconnected limbs, Out of frame,Out of focus,Dehydrated,Error, Disfigured,Disgusting, Extra arms,Extra limbs,Extra hands,Fused fingers,Gross proportions,Long neck,Low res,Low quality,Jpeg,Jpeg artifacts,Malformed limbs,Mutated ,Mutated hands,Mutated limbs,Missing arms,Missing fingers,Picture frame,Poorly drawn hands,Poorly drawn face,Text,Signature,Username,Watermark,Worst quality,Collage ,Pixel,Pixelated,Grainy "
+negativeprompt:str = "Ugly,Bad anatomy,Bad proportions,Bad quality,Blurry,Cropped,Deformed,Disconnected limbs, Out of frame,Out of focus,Dehydrated,Error, Disfigured,Disgusting, Extra arms,Extra limbs,Extra hands,Fused fingers,Gross proportions,Long neck,Low res,Low quality,Jpeg,Jpeg artifacts,Malformed limbs,Mutated ,Mutated hands,Mutated limbs,Missing arms,Missing fingers,Picture frame,Poorly drawn hands,Poorly drawn face,Text,Signature,Username,Watermark,Worst quality,Collage,Grainy "
 
 enabled:bool = True
 

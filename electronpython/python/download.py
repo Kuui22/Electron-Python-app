@@ -5,6 +5,7 @@ import gc,os,json
 import threading
 import requests
 import torch
+import huggingface_hub
 
 directory:str = '../static'
 savedir:str = ""
@@ -75,6 +76,19 @@ def test_link(link):
     except Exception as e:
         print(f"Error in request:{e}")
         return False
+    
+    
+    
+def download_repo(link):
+    if make_folder(name):
+        try:
+            print(f"Download started!")
+            sys.stdout.flush()
+            huggingface_hub.snapshot_download(repo_id=link,local_dir=savedir)
+        except Exception as e:
+            print(f"Error in download:{e}")
+        finally:
+            print(f"Download finished, folder:{savedir}")
 
 def download_model(link,name,modeltype):
     tester = test_link(link)
@@ -95,11 +109,10 @@ def download_model(link,name,modeltype):
                 pipe.save_pretrained(savedir)
                 flush_pipe(pipe)
         elif(pipe_tag =='zero-shot-object-detection'):
-            print(f"I got here!")
-            sys.stdout.flush()
+            download_repo(link)
         elif(pipe_tag =='zero-shot-image-classification'):
-            print(f"I got here!")
-            sys.stdout.flush()
+            download_repo(link)
+                
         else:
                 print(f"The provided pipe type is not supported:{pipe_tag}")
                 sys.stdout.flush()
