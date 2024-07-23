@@ -88,6 +88,24 @@ function startPythonDownload() {
 
   global.pythonChild = child;
 }
+function startPythonCivitAI() {
+  terminalConsole.log('Starting python...');
+  // :TODO Replace the python and [] to the path of the executable when ready
+  child = spawn("python", ["./python/civitAI.py"], { stdio: ["pipe", "pipe", "pipe"] });
+  child.stdout.on("data", (data) => {
+    printBoth(`Python: ${data}`);
+  });
+
+  child.stderr.on("data", (data) => {
+    printBoth(`Python error: ${data}`);
+  });
+
+  child.on("close", (code) => {
+    printBoth(`Python process exited with code ${code}`);
+  });
+
+  global.pythonChild = child;
+}
 //send a message to the python process that is currently listening
 const sendToPython = (str) => {
   if (child && child.stdin.writable) {
@@ -121,6 +139,9 @@ contextBridge.exposeInMainWorld('electron', {
   },
   startPythonDownload: () => {
     startPythonDownload()
+  },
+  startPythonCivitAI: () => {
+    startPythonCivitAI()
   },
   sendPython:(str) => {
     sendToPython(str)

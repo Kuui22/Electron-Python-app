@@ -11,7 +11,7 @@ localmodel:str = "/static/stable1-5"
 localdir:str = "/static/text-to-image/"
 modelurl:str = "runwayml/stable-diffusion-v1-5"
 directory:str = '../images'
-negativeprompt:str = "Ugly,Bad anatomy,Bad proportions,Bad quality,Blurry,Cropped,Deformed,Disconnected limbs, Out of frame,Out of focus,Dehydrated,Error, Disfigured,Disgusting, Extra arms,Extra limbs,Extra hands,Fused fingers,Gross proportions,Long neck,Low res,Low quality,Jpeg,Jpeg artifacts,Malformed limbs,Mutated ,Mutated hands,Mutated limbs,Missing arms,Missing fingers,Picture frame,Poorly drawn hands,Poorly drawn face,Text,Signature,Username,Watermark,Worst quality,Collage,Grainy "
+negativeprompt:str = "3d,Ugly,Bad anatomy,Bad proportions,Bad quality,Bad eyes,Crooked,Crooked eyes,Bad mouth,Crooked mouth,Bad Face,Blurry,Cropped,Deformed,Disconnected limbs, Out of frame,Out of focus,Dehydrated,Error, Disfigured,Disgusting, Extra arms,Extra limbs,Extra hands,Fused fingers,Gross proportions,Long neck,Low res,Low quality,Jpeg,Jpeg artifacts,Malformed limbs,Mutated ,Mutated hands,Mutated limbs,Missing arms,Missing fingers,Picture frame,Poorly drawn hands,Poorly drawn face,Text,Signature,Username,Watermark,Worst quality,Collage,Grainy "
 
 enabled:bool = True
 
@@ -84,9 +84,12 @@ def generate_image(model:str,prompt,negative_prompt="",height=512,width=512,guid
         elif('pony' in model):
             print(f"I'm a pony model.")
             ponyprompt="score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up,source_anime,"+prompt
+            #adding clip skip
+            #clip_layers = pipe.text_encoder.text_model.encoder.layers
+            #pipe.text_encoder.text_model.encoder.layers = clip_layers[:-2]
             image:Image = pipe(
                 ponyprompt,
-                negative_prompt="",
+                negative_prompt="score_4,score_3,score_2,score_1,",#+negativeprompt,
                 num_inference_steps=num_inference_steps,
                 guidance_scale=guidance_scale,
                 height=height,
