@@ -12,6 +12,7 @@ image gallery from node folder
 image generation with local model!
 
 downloading image generation model from hf active!
+
 you can make models from other pipelines work by converting them with this: https://raw.githubusercontent.com/huggingface/diffusers/v0.29.2/scripts/convert_original_stable_diffusion_to_diffusers.py
 adding --to_safetensors in the args. (if it's a safetensor also add --from safetensors)
 example command: python convert_original_stable_diffusion_to_diffusers.py --checkpoint_path ponyv6.safetensors --dump_path pony_v6/ --from_safetensors --to_safetensors
