@@ -81,6 +81,21 @@ def generate_image(model:str,prompt,negative_prompt="",height=512,width=512,guid
                 add_quality_tags= True,
                 quality_tags= "Heavy v3.1"
             ).images[0]
+        elif('pony' in model):
+            print(f"I'm a pony model.")
+            ponyprompt="score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up,source_anime,"+prompt
+            image:Image = pipe(
+                ponyprompt,
+                negative_prompt="",
+                num_inference_steps=num_inference_steps,
+                guidance_scale=guidance_scale,
+                height=height,
+                width=width,
+                sampler= "Euler a",
+                sdxl_style="(None)"
+                #add_quality_tags= True,
+                #quality_tags= "Heavy v3.1"
+            ).images[0]
         else:
             image:Image = pipe(
                 prompt,
