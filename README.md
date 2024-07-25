@@ -1,6 +1,6 @@
 # Electron-Python-app
  trying to mix electron and python.
- 
+ I guess this works as a proof of concept that stuff like comfyui could be made in electron.
 Currently working:
 
 communication with python via std
